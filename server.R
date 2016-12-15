@@ -14,7 +14,7 @@ library(googlesheets)
 shinyServer(function(input, output) {
   
   # Modify the file size limitation to 30 MB
-  options(shiny.maxRequestSize=30*1024^2)
+  options(shiny.maxRequestSize = 30 * 1024 ^ 2)
   
   # Set the Encoding option to hide by default
   hide("Encoding")
@@ -64,10 +64,9 @@ shinyServer(function(input, output) {
     if (is.null (inFile1)) {
       return (NULL)
     } else {
-       inFile1 %>% rowwise() %>%
-        do({
-          read.csv(.$datapath, fileEncoding = input$Encoding)
-        }) %>% return
+      lapply(inFile1$datapath, function(k) {
+        read.csv(k, fileEncoding = input$Encoding, stringsAsFactors = FALSE) }) %>% 
+        rbind.fill %>% return
     }
   })
   

@@ -54,7 +54,7 @@ shinyUI(fluidPage(
                        hr(),
                        actionButton("EncodingOptions", "Additional Options",
                                     width = "100%")),
-      radioButtons("Encoding","編碼", c("big5", "UTF-8")),
+      radioButtons("Encoding","Encoding", c("big5", "UTF-8")),
       conditionalPanel(condition="$('html').hasClass('shiny-busy')",
                        tags$div("Processing...", id="loadmessage"))
     ),
